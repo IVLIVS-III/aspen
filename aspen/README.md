@@ -15,7 +15,7 @@ dependencies:
   aspen: ^0.3.0
   aspen_assets: ^0.3.0
 dev_dependencies:
-  aspen_generator: ^0.3.0
+  aspen_builder: ^0.3.0
 ```
 
 If you want to embed web-related assets (e.g. JavaScript and CSS), you can add `aspen_web`, but
