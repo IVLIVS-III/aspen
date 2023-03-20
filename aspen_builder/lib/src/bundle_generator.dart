@@ -13,6 +13,7 @@ class LoaderException implements Exception {
   final bool ownLine;
 
   LoaderException(this.message, {this.ownLine});
+
   @override
   String toString() => message;
 }
@@ -60,7 +61,7 @@ class BundleGenerator extends GeneratorForAnnotation<Asset> {
     }
 
     error(variableElement,
-        'Asset type ${type.displayName} has no @LoadableAsset annotation');
+        'Asset type ${type.getDisplayString(withNullability: true)} has no @LoadableAsset annotation');
     return null;
   }
 
