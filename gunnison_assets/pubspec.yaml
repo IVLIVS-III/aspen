@@ -1,18 +1,18 @@
-name: aspen_assets
-version: 0.3.0
+name: gunnison_assets
+version: 0.4.0
 description: A modern, easy-to-use asset packer (assets package)
-homepage: https://github.com/refi64/aspen
+homepage: https://github.com/refi64/gunnison
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  aspen: ^0.3.0+1
+  gunnison: ^0.4.0
   base85: ^1.0.3
 
 dependency_overrides:
-  aspen:
-    path: ../aspen
+  gunnison:
+    path: ../gunnison
 
 dev_dependencies:
   lints: ^2.0.1

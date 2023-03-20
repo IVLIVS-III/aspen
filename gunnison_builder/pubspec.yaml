@@ -1,14 +1,14 @@
-name: aspen_builder
-version: 0.3.0+1
+name: gunnison_builder
+version: 0.4.0
 description: A modern, easy-to-use asset packer (builder package)
-homepage: https://github.com/refi64/aspen
+homepage: https://github.com/refi64/gunnison
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   analyzer: ^5.8.0
-  aspen: ^0.3.0+1
+  gunnison: ^0.4.0
   build: ^2.3.1
   csslib: ^0.17.2
   source_gen: ^1.2.7
@@ -17,6 +17,6 @@ dependencies:
 dev_dependencies:
   lints: ^2.0.1
 
-# dependency_overrides:
-#   aspen:
-#     path: ../aspen
+dependency_overrides:
+  gunnison:
+    path: ../gunnison

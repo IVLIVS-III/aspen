@@ -1,11 +1,11 @@
 @JS()
-library aspen_web;
+library gunnison_web;
 
 import 'dart:async';
 import 'dart:html';
 
-import 'package:aspen/aspen.dart';
-import 'package:aspen_assets/aspen_assets.dart';
+import 'package:gunnison/gunnison.dart';
+import 'package:gunnison_assets/gunnison_assets.dart';
 import 'package:js/js.dart';
 import 'package:js/js_util.dart';
 
@@ -51,7 +51,7 @@ class JsAsset extends TextAsset {
   /// Asyncronously evaluate the code, completing the future once the code is run. Note
   /// that no DDC workarounds are performed, unlike evalSync.
   Future evalAsync() {
-    var attr = r'aspen$js' + (_jsCounter++).toString();
+    var attr = r'gunnison$js' + (_jsCounter++).toString();
 
     var el = ScriptElement();
     el.async = true;
@@ -98,7 +98,7 @@ class CssAssetInline {
 /// An asset containing a CSS stylesheet. URIs referenced from it can be inlined via the
 /// [inline] constructor parameter. The CSS can be globally applied via [apply].
 @LoadableAsset(
-    url: 'package:aspen_generator/src/default_loaders.dart',
+    url: 'package:gunnison_generator/src/default_loaders.dart',
     loader: 'CssLoader')
 class CssAsset extends TextAsset {
   /// Takes on one of:

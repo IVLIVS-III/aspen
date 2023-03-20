@@ -1,41 +1,41 @@
-# aspen
+# gunnison
 
-Aspen is a modern, easy-to-use asset packer for Dart, compatible with both server and client.
+Gunnison is a modern, easy-to-use asset packer for Dart, compatible with both server and client.
 
-**NOTE:** Aspen 0.3 is an *enormous* breaking change from 0.2, but it's largely a net positive,
+**NOTE:** Gunnison 0.3 is an *enormous* breaking change from 0.2, but it's largely a net positive,
 as it now integrates more closely with `package:build` and supports incremental builds.
 
 ## Installation
 
-At minimum, you'll need the `aspen` and `aspen_assets` packages, as well as a dev dependency on
-`aspen_generator`:
+At minimum, you'll need the `gunnison` and `gunnison_assets` packages, as well as a dev dependency on
+`gunnison_generator`:
 
 ```yaml
 dependencies:
-  aspen: ^0.3.0
-  aspen_assets: ^0.3.0
+  gunnison: ^0.3.0
+  gunnison_assets: ^0.3.0
 dev_dependencies:
-  aspen_builder: ^0.3.0
+  gunnison_builder: ^0.3.0
 ```
 
-If you want to embed web-related assets (e.g. JavaScript and CSS), you can add `aspen_web`, but
+If you want to embed web-related assets (e.g. JavaScript and CSS), you can add `gunnison_web`, but
 this will make your project web-only:
 
 ```yaml
 dependencies:
-  aspen: ^0.3.0
-  aspen_assets: ^0.3.0
-  aspen_web: ^0.3.0
+  gunnison: ^0.3.0
+  gunnison_assets: ^0.3.0
+  gunnison_web: ^0.3.0
 dev_dependencies:
-  aspen_builder: ^0.3.0
+  gunnison_builder: ^0.3.0
 ```
 
 ## Usage
 
 ### The idea
 
-The basic idea of how Aspen works is that you create a `.dart` file, containing `@Asset`
-annotations. Aspen will process this file and create a `.g.dart` file containing the
+The basic idea of how Gunnison works is that you create a `.dart` file, containing `@Asset`
+annotations. Gunnison will process this file and create a `.g.dart` file containing the
 included assets.
 
 ### A simple example
@@ -43,17 +43,17 @@ included assets.
 Assume this all goes in `lib/assets.dart` in `my_package`:
 
 ```dart
-import 'package:aspen/aspen.dart';
-import 'package:aspen_assets/aspen_assets.dart';
+import 'package:gunnison/gunnison.dart';
+import 'package:gunnison_assets/gunnison_assets.dart';
 
 // Here, we load the to-be-generated assets file, which contains the actual asset content.
 part 'assets.g.dart';
 
-// @Asset is an annotation from package:aspen that marks the asset to be packed.
+// @Asset is an annotation from package:gunnison that marks the asset to be packed.
 @Asset('asset:my_package/web/my-asset.txt')
 // We create a const (it must be const!) value that holds the generated asset content.
 const myTextAsset = TextAsset(text: _myTextAsset$content);
-// aspen_generator will use the value (here, it's TextAsset(...)) to determine what type of
+// gunnison_generator will use the value (here, it's TextAsset(...)) to determine what type of
 // asset to use.
 
 // We can also provide a different path to be used in release mode:
@@ -87,12 +87,12 @@ void main() {
 
 ### Web assets
 
-`package:aspen_web` provides some more assets handy for client-side web development. Say we put
+`package:gunnison_web` provides some more assets handy for client-side web development. Say we put
 this in `assets.dart`:
 
 ```dart
-import 'package:aspen/aspen.dart';
-import 'package:aspen_web/aspen_web.dart';
+import 'package:gunnison/gunnison.dart';
+import 'package:gunnison_web/gunnison_web.dart';
 
 import 'assets.g.dart' as assets_g;
 
@@ -152,7 +152,7 @@ void main() async {
 ### Using with JavaScript package managers
 
 By default `package:build` only allows you to use assets from a [pre-defined
-whitelist of directories](https://github.com/dart-lang/build/blob/build-v1.1.0/build_runner_core/lib/src/generate/options.dart#L19-L31). Therefore, aspen won't be able to read anything from e.g. a node_modules directory.
+whitelist of directories](https://github.com/dart-lang/build/blob/build-v1.1.0/build_runner_core/lib/src/generate/options.dart#L19-L31). Therefore, gunnison won't be able to read anything from e.g. a node_modules directory.
 
 The easiest workaround is to save the assets into the `assets` directory, which *is* whitelisted. For instance,
 with yarn, create a `.yarnrc` containing:
@@ -172,5 +172,5 @@ because it's in the whitelisted `assets` directory.
 - Dart code is now generated, rather than JavaScript code. This allows you to import assets
   directly into your Dart code, and it also makes tree shaking far more effective.
 
-You're best off reading this entire README first, then manually moving over from aspen.yml to
+You're best off reading this entire README first, then manually moving over from gunnison.yml to
 a .dart file.

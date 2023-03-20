@@ -1,0 +1,21 @@
+name: gunnison_web
+version: 0.4.0
+description: A modern, easy-to-use asset packer (web package)
+homepage: https://github.com/refi64/gunnison
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  gunnison: ^0.4.0
+  gunnison_assets: ^0.4.0
+  js: ^0.6.7
+
+dev_dependencies:
+  lints: ^2.0.1
+
+dependency_overrides:
+  gunnison:
+    path: ../gunnison
+  gunnison_assets:
+    path: ../gunnison_assets

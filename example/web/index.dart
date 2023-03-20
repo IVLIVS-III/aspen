@@ -1,8 +1,8 @@
-// import 'package:aspen_assets/aspen_assets.dart' as aspen;
+// import 'package:gunnison_assets/gunnison_assets.dart' as gunnison;
 // import 'dart:html';
 
-import 'package:aspen_playground/assets.dart';
-import 'package:aspen_web/aspen_web.dart';
+import 'package:gunnison_playground/assets.dart';
+import 'package:gunnison_web/gunnison_web.dart';
 
 void main() {
   JsAsset(text: 'console.log("loading...")')

@@ -1,10 +1,10 @@
-import 'package:aspen/aspen.dart';
-import 'package:aspen_assets/aspen_assets.dart';
-import 'package:aspen_web/aspen_web.dart';
+import 'package:gunnison/gunnison.dart';
+import 'package:gunnison_assets/gunnison_assets.dart';
+import 'package:gunnison_web/gunnison_web.dart';
 
 part 'assets.g.dart';
 
-const assetsPrefix = 'asset:aspen_playground/assets/node_modules';
+const assetsPrefix = 'asset:gunnison_playground/assets/node_modules';
 
 @Asset('$assetsPrefix/jquery/README.md')
 const jqueryReadme = TextAsset(text: _jqueryReadme$content);

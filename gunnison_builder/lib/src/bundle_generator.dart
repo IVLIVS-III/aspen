@@ -3,7 +3,7 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 
-import 'package:aspen/aspen.dart';
+import 'package:gunnison/gunnison.dart';
 
 import '../loader.dart';
 import 'default_loaders.dart';
@@ -91,7 +91,7 @@ class BundleGenerator extends GeneratorForAnnotation<Asset> {
     }
 
     assert(
-        loadableAsset.url == 'package:aspen_builder/src/default_loaders.dart');
+        loadableAsset.url == 'package:gunnison_builder/src/default_loaders.dart');
 
     var loader = defaultLoaders[loadableAsset.loader];
 
