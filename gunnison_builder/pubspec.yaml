@@ -8,7 +8,10 @@ environment:
 
 dependencies:
   analyzer: ^5.8.0
-  gunnison: ^0.4.0
+  gunnison:
+    git:
+      url: https://github.com/IVLIVS-III/gunnison.git
+      path: gunnison
   build: ^2.3.1
   csslib: ^0.17.2
   source_gen: ^1.2.7

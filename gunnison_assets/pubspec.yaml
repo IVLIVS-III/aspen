@@ -7,7 +7,10 @@ environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  gunnison: ^0.4.0
+  gunnison:
+    git:
+      url: https://github.com/IVLIVS-III/gunnison.git
+      path: gunnison
   base85: ^1.0.3
 
 dependency_overrides:
