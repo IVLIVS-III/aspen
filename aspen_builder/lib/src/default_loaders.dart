@@ -1,6 +1,8 @@
+import 'dart:typed_data';
+
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
-import 'package:z85/z85.dart';
+import 'package:base85/base85.dart';
 
 import '../loader.dart';
 import 'default_loaders/css_loader.dart';
@@ -25,7 +27,8 @@ class BinaryLoader implements Loader {
     bytes.addAll(List<int>.filled(padding - 1, 0));
     bytes.add(padding);
 
-    var encoded = z85.encode(bytes);
+    var codec = Base85Codec(Alphabets.z85);
+    var encoded = codec.encode(bytes as Uint8List);
     return Future<String>.value(encoded);
   }
 }

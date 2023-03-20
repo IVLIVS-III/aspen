@@ -14,7 +14,7 @@ class _UrlEmbedVisitor extends Visitor {
   LoaderContext ctx;
   AssetId asset;
   // If empty, then inline everything.
-  List<String> inline;
+  List<String?> inline;
 
   var futures = <Future>[];
 
@@ -36,7 +36,7 @@ class _UrlEmbedVisitor extends Visitor {
     try {
       uri = Uri.parse(node.value);
     } on FormatException {
-      ctx.error(node.span.message('invalid URI'), ownLine: true);
+      ctx.error(node.span!.message('invalid URI'), ownLine: true);
       return Future.value();
     }
 
@@ -46,7 +46,7 @@ class _UrlEmbedVisitor extends Visitor {
 
     var target = AssetId.resolve(node.value, from: asset);
     if (!await ctx.buildStep.canRead(target)) {
-      ctx.error(node.span.message('target of URI does not exist'),
+      ctx.error(node.span!.message('target of URI does not exist'),
           ownLine: true);
       return Future.value();
     }
@@ -69,7 +69,7 @@ class CssLoader extends TextLoader {
       LoaderContext ctx, AssetId asset, ConstantReader options) async {
     var inlineOption = options.read('inline');
     var inlineAll = false;
-    var inlineOnly = <String>[];
+    List<String?> inlineOnly = <String>[];
 
     if (!inlineOption.isNull) {
       inlineAll = inlineOption.read('inlineAll').boolValue;

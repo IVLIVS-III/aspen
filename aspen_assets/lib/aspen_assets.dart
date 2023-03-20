@@ -1,7 +1,8 @@
 import 'dart:convert' as convert;
 
 import 'package:aspen/aspen.dart';
-import 'package:z85/z85.dart';
+
+import 'package:base85/base85.dart';
 
 /// An asset containing plain text.
 @LoadableAsset(
@@ -10,7 +11,7 @@ import 'package:z85/z85.dart';
 class TextAsset {
   final String text;
 
-  const TextAsset({this.text});
+  const TextAsset({required this.text});
 }
 
 /// An asset containing binary data, encoded via z85 encoding. The number of padding bytes
@@ -25,11 +26,12 @@ class BinaryAsset {
   /// The z85-encoded data as a string.
   final String encoded;
 
-  const BinaryAsset({this.encoded});
+  const BinaryAsset({required this.encoded});
 
   /// Return an iterable of the decoded binary data.
   Iterable<int> decode() {
-    var decoded = z85.decode(encoded);
+    var codec = Base85Codec(Alphabets.z85);
+    var decoded = codec.decode(encoded);
     var padding = decoded.last;
     return decoded.getRange(0, decoded.length - padding);
   }
@@ -37,7 +39,7 @@ class BinaryAsset {
 
 /// An asset containing Json data. The data can be parsed via [json()].
 class JsonAsset extends TextAsset {
-  const JsonAsset({String text}) : super(text: text);
+  const JsonAsset({required String text}) : super(text: text);
 
   /// Parse and return the json object.
   dynamic json() => convert.json.decode(text);

@@ -12,7 +12,7 @@ class LoaderException implements Exception {
   final String message;
   final bool ownLine;
 
-  LoaderException(this.message, {this.ownLine});
+  LoaderException(this.message, {required this.ownLine});
 
   @override
   String toString() => message;
@@ -39,21 +39,25 @@ class BundleGenerator extends GeneratorForAnnotation<Asset> {
     log.severe(spanForElement(element).message(error));
   }
 
-  LoadableAsset getLoadableAsset(VariableElement variableElement) {
-    DartType type = variableElement.computeConstantValue().type;
+  LoadableAsset? getLoadableAsset(VariableElement variableElement) {
+    DartType? type = variableElement.computeConstantValue()?.type;
     if (!(type is InterfaceType)) {
       error(variableElement,
           '@Asset(...) ${variableElement.displayName} has an invalid type');
     }
 
-    var current = type as InterfaceType;
+    var current = type as InterfaceType?;
     while (current != null) {
       for (var ann in current.element.metadata) {
         var annValue = ann.computeConstantValue();
-        if (annValue != null && typeNameOf(annValue.type) == 'LoadableAsset') {
-          return LoadableAsset(
-              url: annValue.getField('url').toStringValue(),
-              loader: annValue.getField('loader').toStringValue());
+        final DartType? annValueType = annValue?.type;
+        if (annValueType != null &&
+            typeNameOf(annValueType) == 'LoadableAsset') {
+          var url = annValue!.getField('url')?.toStringValue();
+          var loader = annValue.getField('loader')?.toStringValue();
+          if (url != null && loader != null) {
+            return LoadableAsset(url: url, loader: loader);
+          }
         }
       }
 
@@ -61,19 +65,19 @@ class BundleGenerator extends GeneratorForAnnotation<Asset> {
     }
 
     error(variableElement,
-        'Asset type ${type.getDisplayString(withNullability: true)} has no @LoadableAsset annotation');
+        'Asset type ${type?.getDisplayString(withNullability: true)} has no @LoadableAsset annotation');
     return null;
   }
 
   @override
-  Future<String> generateForAnnotatedElement(
+  Future<String?> generateForAnnotatedElement(
       Element element, ConstantReader annotation, BuildStep buildStep) async {
     if (!(element is VariableElement)) {
       error(element, '@Asset(...) may only be used on variables');
       return Future.value();
     }
 
-    var variableElement = element as VariableElement;
+    var variableElement = element;
     var value = variableElement.computeConstantValue();
     if (value == null) {
       error(element,
@@ -110,6 +114,11 @@ class BundleGenerator extends GeneratorForAnnotation<Asset> {
     }
 
     String content;
+
+    if (loader == null) {
+      error(element, 'Loader ${loadableAsset.loader} cannot be found');
+      return Future.value();
+    }
 
     try {
       content = await loader()

@@ -1,6 +1,6 @@
 name: aspen_playground
 environment:
-  sdk: ">=2.8.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 dependencies:
   aspen: any
   aspen_assets: any

@@ -20,7 +20,7 @@ int _jsCounter = 0;
 /// An asset containing JavaScript code. The code within can be executed via [eval],
 /// [evalSync], or [evalAsync].
 class JsAsset extends TextAsset {
-  const JsAsset({String text}) : super(text: text);
+  const JsAsset({required String text}) : super(text: text);
 
   /// Syncronously evaluate the code, with the given [scope] (the top-level window is the
   /// default scope).
@@ -60,7 +60,7 @@ class JsAsset extends TextAsset {
     var completer = Completer();
     setProperty(_window, attr, allowInterop(() => completer.complete()));
 
-    document.head.append(el);
+    document.head?.append(el);
     return completer.future;
   }
 
@@ -107,12 +107,12 @@ class CssAsset extends TextAsset {
   /// - [CssAssetInline.only()] - Only inline URIs in the given list.
   final CssAssetInline inline;
 
-  const CssAsset({String text, this.inline = CssAssetInline.none})
+  const CssAsset({required String text, this.inline = CssAssetInline.none})
       : super(text: text);
 
   void apply() {
     var el = StyleElement();
     el.text = text;
-    document.head.append(el);
+    document.head?.append(el);
   }
 }
